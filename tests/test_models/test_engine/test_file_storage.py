@@ -27,7 +27,7 @@ class TestFileStorage(unittest.TestCase):
         cls.storage = FileStorage()
 
     @classmethod
-    def teardown(cls):
+    def tearDownClass(cls):
         """at the end of the test this will tear it down"""
         del cls.user
 
@@ -35,7 +35,7 @@ class TestFileStorage(unittest.TestCase):
         """teardown"""
         try:
             os.remove("file.json")
-        except Exception:
+        except Exception as e:
             pass
 
     def test_pep8_FileStorage(self):
@@ -74,7 +74,7 @@ class TestFileStorage(unittest.TestCase):
             lines = f.readlines()
         try:
             os.remove(path)
-        except:
+        except Exception as e:
             pass
         self.storage.save()
         with open(path, 'r') as f:
@@ -82,7 +82,7 @@ class TestFileStorage(unittest.TestCase):
         self.assertEqual(lines, lines2)
         try:
             os.remove(path)
-        except:
+        except Exception as e:
             pass
         with open(path, "w") as f:
             f.write("{}")
